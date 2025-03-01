@@ -509,10 +509,21 @@ st.title("🎬 YouTube Video Analysis & Q&A")
 DEFAULT_WIDTH = 80
 # Check if API keys are provided
 if not gemini_api_key:
-    st.warning("⚠️ Please enter a Gemini API key in the sidebar to use this application")
+    st.warning("""
+        ⚠️ **Please enter your Gemini API key in the sidebar to use this application.**
+        
+        You can obtain your API key from the following link:  
+        [Get Gemini API Key](https://aistudio.google.com/app/apikey)
+        """)
 
 if not assemblyai_api_key:
-    st.warning("⚠️ Please enter an AssemblyAI API key in the sidebar for audio transcription")
+    st.warning("""
+⚠️ **Please enter an AssemblyAI API key in the sidebar for audio transcription.**
+
+You can obtain your API key from the following link:  
+[Get AssemblyAI API Key](https://www.assemblyai.com/)
+""")
+
 
 # Show current status in the sidebar (left side)
 st.sidebar.subheader("Current Status")
