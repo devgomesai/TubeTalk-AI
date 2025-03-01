@@ -525,7 +525,7 @@ else:
 if gemini_api_key and assemblyai_api_key:
     # Main UI in a single column
     st.subheader("Enter a YouTube Video")
-    video_url = st.text_input("Paste YouTube URL:")
+    video_url = st.text_input("Paste YouTube URL:", placeholder="Paste the URL in this format: https://www.youtube.com/watch?v=XXXXX")
 
     if video_url:
         st.video(video_url)
