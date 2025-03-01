@@ -28,8 +28,8 @@ if "vectorstore" not in st.session_state:
 
 # API Keys section
 st.sidebar.header("API Configuration")
-gemini_api_key = st.sidebar.text_input("Gemini API Key", type="password", value=os.getenv("GEMINI_API_KEY", ""))
-assemblyai_api_key = st.sidebar.text_input("AssemblyAI API Key", type="password", value=os.getenv("ASSEMBLYAI_API_KEY", ""))
+gemini_api_key = st.sidebar.text_input("Gemini API Key", type="password")
+assemblyai_api_key = st.sidebar.text_input("AssemblyAI API Key", type="password")
 
 # Save API keys to environment if provided
 if gemini_api_key:
