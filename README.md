@@ -21,8 +21,3 @@ Features
 ✅ AI-generated video summaries
 ✅ Live chat replay integration
 ✅ Simple and user-friendly interface
-
-How It Works
-Enter a YouTube Video URL – The app fetches the transcript.
-AI Summarization – If a transcript is unavailable, the app processes the video audio to generate a summary.
-Live Chat Replay – Displays live chat messages from the video.
