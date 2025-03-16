@@ -28,8 +28,8 @@ if "vectorstore" not in st.session_state:
 
 # API Keys section
 st.sidebar.header("API Configuration")
-gemini_api_key = st.sidebar.text_input("Gemini API Key", type="password", value=os.getenv("GEMINI_API_KEY", ""))
-assemblyai_api_key = st.sidebar.text_input("AssemblyAI API Key", type="password", value=os.getenv("ASSEMBLYAI_API_KEY", ""))
+gemini_api_key = st.sidebar.text_input("Gemini API Key", type="password")
+assemblyai_api_key = st.sidebar.text_input("AssemblyAI API Key", type="password")
 
 # Save API keys to environment if provided
 if gemini_api_key:
@@ -519,10 +519,21 @@ st.title("🎬 YouTube Video Analysis & Q&A")
 DEFAULT_WIDTH = 80
 # Check if API keys are provided
 if not gemini_api_key:
-    st.warning("⚠️ Please enter a Gemini API key in the sidebar to use this application")
+    st.warning("""
+        ⚠️ **Please enter your Gemini API key in the sidebar to use this application.**
+        
+        You can obtain your API key from the following link:  
+        [Get Gemini API Key](https://aistudio.google.com/app/apikey)
+        """)
 
 if not assemblyai_api_key:
-    st.warning("⚠️ Please enter an AssemblyAI API key in the sidebar for audio transcription")
+    st.warning("""
+⚠️ **Please enter an AssemblyAI API key in the sidebar for audio transcription.**
+
+You can obtain your API key from the following link:  
+[Get AssemblyAI API Key](https://www.assemblyai.com/)
+""")
+
 
 # Show current status in the sidebar (left side)
 st.sidebar.subheader("Current Status")
@@ -535,7 +546,7 @@ else:
 if gemini_api_key and assemblyai_api_key:
     # Main UI in a single column
     st.subheader("Enter a YouTube Video")
-    video_url = st.text_input("Paste YouTube URL:")
+    video_url = st.text_input("Paste YouTube URL:", placeholder="Paste the URL in this format: https://www.youtube.com/watch?v=XXXXX")
 
     if video_url:
         st.video(video_url)
