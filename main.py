@@ -1,19 +1,21 @@
-import streamlit as st
 import os
-from urllib.parse import urlparse, parse_qs
-from youtube_transcript_api import YouTubeTranscriptApi
-import yt_dlp
-from langchain_community.vectorstores import FAISS
-from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain_google_genai import GoogleGenerativeAIEmbeddings
+from urllib.parse import parse_qs, urlparse
+
 import assemblyai as aai
-from langchain_google_genai import ChatGoogleGenerativeAI
-from langchain.agents import create_tool_calling_agent
-from langchain.tools import Tool
-from langchain.prompts import ChatPromptTemplate
 import google.auth.exceptions
 import pandas as pd
+import streamlit as st
+import yt_dlp
 from dotenv import load_dotenv
+from langchain.agents import create_tool_calling_agent
+from langchain.prompts import ChatPromptTemplate
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain.tools import Tool
+from langchain_community.vectorstores import FAISS
+from langchain_google_genai import (ChatGoogleGenerativeAI,
+                                    GoogleGenerativeAIEmbeddings)
+from youtube_transcript_api import YouTubeTranscriptApi
+
 load_dotenv()
 
 # Initialize session state
@@ -316,6 +318,8 @@ Your summary:
     return summary
 
 # Tool: Generate Quiz from YouTube Video (improved)
+# Also update your generate_quiz function to ensure consistent JSON output:
+
 def generate_quiz():
     update_status("Generating quiz from video content...")
     if "transcript" not in st.session_state or not st.session_state.transcript:
@@ -341,28 +345,55 @@ Instructions:
 1. Create 5 meaningful multiple-choice questions that test understanding of key concepts from the video.
 2. For each question, provide 4 options (A, B, C, D) with only one correct answer.
 3. Ensure questions vary in difficulty from basic recall to critical thinking.
-4. After all questions, provide the correct answers in a separate answer key.
-5. Format the quiz clearly with proper spacing and numbering.
-6. Ensure all questions are focused on the most important points from the video.
-. Provide the output as a valid JSON object with the following structure:
+4. Make sure to follow this EXACT format for each question and answer:
+   - Each question should have options labeled exactly as "A. [option text]", "B. [option text]", etc.
+   - The correct answer should be just the letter (A, B, C, or D).
+5. Format the output as a valid JSON object with EXACTLY this structure - this is critical:
 
-```json
 {{
     "quiz": [
-        {{"question": "Question 1", "options": ["A", "B", "C", "D"], "answer": "A"}},
-        {{"question": "Question 2", "options": ["A", "B", "C", "D"], "answer": "C"}},
-        ...
+        {{"question": "Question text here", "options": ["A. Option 1", "B. Option 2", "C. Option 3", "D. Option 4"], "answer": "A"}},
+        {{"question": "Question text here", "options": ["A. Option 1", "B. Option 2", "C. Option 3", "D. Option 4"], "answer": "C"}},
+        ...and so on for all 5 questions
     ]
 }}
 
-Your quiz:
+IMPORTANT: Your response must be ONLY the JSON object with no additional text or explanations before or after it.
 """
-    response = llm.invoke(prompt)
-    quiz = response.content
-    st.session_state.quiz = quiz
-    update_status("Quiz generated successfully")
-    return quiz
+    try:
+        response = llm.invoke(prompt)
+        quiz_text = response.content
+        
+        # Process the response to extract just the JSON part
+        import json
+        import re
 
+        # Try to find JSON structure in the response
+        json_match = re.search(r'```json\s*(.*?)\s*```', quiz_text, re.DOTALL)
+        if json_match:
+            quiz_text = json_match.group(1)
+        else:
+            # Look for any JSON-like structure
+            json_match = re.search(r'({.*})', quiz_text, re.DOTALL)
+            if json_match:
+                quiz_text = json_match.group(1)
+        
+        # Validate the JSON
+        json.loads(quiz_text)  # This will raise an exception if invalid
+        
+        st.session_state.quiz = quiz_text
+        update_status("Quiz generated successfully")
+        return quiz_text
+    except Exception as e:
+        update_status(f"Error generating quiz: {str(e)}")
+        fallback_quiz = {
+            "quiz": [
+                {"question": "Failed to generate quiz. Please try again.", 
+                 "options": ["A. Retry", "B. Check API keys", "C. Try a different video", "D. Contact support"], 
+                 "answer": "A"}
+            ]
+        }
+        return json.dumps(fallback_quiz)
 # Intelligent Transcript Acquisition Logic
 def smart_get_transcript(url):
     """Intelligent function that tries multiple methods to get a transcript"""
@@ -593,15 +624,204 @@ if gemini_api_key and assemblyai_api_key:
             elif st.session_state.summary:
                 st.markdown(st.session_state.summary)
 
+# In the tab3 section of your Streamlit UI, replace the existing code with this fixed version:
         with tab3:
             st.subheader("Knowledge Quiz")
+            
+            # Initialize session state for quiz data and user answers if not already present
+            if 'quiz_data' not in st.session_state:
+                st.session_state.quiz_data = None
+            if 'user_answers' not in st.session_state:
+                st.session_state.user_answers = {}
+            if 'quiz_submitted' not in st.session_state:
+                st.session_state.quiz_submitted = False
+            if 'score' not in st.session_state:
+                st.session_state.score = 0
+            
+            # Generate Quiz button
             if st.button("Generate Quiz"):
                 with st.spinner("Creating educational quiz based on video content..."):
-                    quiz = generate_quiz() 
-                    ### quiz->jason 
-                    #FUNCTION TO DISPLAY QUIZ 
-                st.markdown(quiz)
-            elif st.session_state.quiz:
-                st.markdown(st.session_state.quiz)
+                    # Call your existing generate_quiz function
+                    quiz_response = generate_quiz()
+                    
+                    # Reset quiz-related session state
+                    st.session_state.quiz_data = None
+                    st.session_state.user_answers = {}
+                    st.session_state.quiz_submitted = False
+                    st.session_state.score = 0
+                    
+                    # Process the quiz response
+                    if isinstance(quiz_response, str):
+                        try:
+                            # Extract JSON part from the response
+                            import json
+                            import re
+
+                            # Find JSON content between triple backticks if present
+                            json_match = re.search(r'```json\s*(.*?)\s*```', quiz_response, re.DOTALL)
+                            if json_match:
+                                json_str = json_match.group(1)
+                            else:
+                                # Look for any JSON-like structure
+                                json_match = re.search(r'({.*})', quiz_response, re.DOTALL)
+                                if json_match:
+                                    json_str = json_match.group(1)
+                                else:
+                                    json_str = quiz_response
+                            
+                            # Parse the JSON
+                            parsed_data = json.loads(json_str)
+                            st.session_state.quiz_data = parsed_data
+                        except Exception as e:
+                            st.error(f"Failed to parse quiz data: {str(e)}")
+                            st.session_state.quiz = quiz_response
+                            st.markdown(quiz_response)
+                    else:
+                        # If it's already a dictionary, store it directly
+                        st.session_state.quiz_data = quiz_response
+            
+            # Display quiz if quiz_data is available
+            if 'quiz_data' in st.session_state and st.session_state.quiz_data:
+                quiz_data = st.session_state.quiz_data
+                
+                # Check if we have proper dictionary structure
+                if isinstance(quiz_data, dict) and "quiz" in quiz_data:
+                    # Access the quiz questions safely
+                    questions = quiz_data.get("quiz", [])
+                    
+                    # If not submitted yet, show questions
+                    if not st.session_state.quiz_submitted:
+                        st.write("Answer the following questions based on the video content:")
+                        
+                        # Display each question
+                        for idx, question_data in enumerate(questions):
+                            # Access question fields safely with .get() to avoid errors
+                            question_text = question_data.get("question", f"Question {idx+1}")
+                            options = question_data.get("options", [])
+                            
+                            st.write(f"**Question {idx + 1}:** {question_text}")
+                            
+                            # Create a unique key for each radio button group
+                            # Ensure options are properly formatted for display
+                            display_options = []
+                            for i, option in enumerate(options):
+                                if not option.startswith(("A. ", "B. ", "C. ", "D. ")):
+                                    option_letter = chr(65 + i)  # Convert to A, B, C, D
+                                    display_options.append(f"{option_letter}. {option}")
+                                else:
+                                    display_options.append(option)
+                            
+                            selected_option = st.radio(
+                                f"Select your answer for question {idx + 1}:",
+                                display_options,
+                                key=f"q{idx}",
+                                index=None
+                            )
+                            
+                            # Update the answer when selected
+                            if selected_option:
+                                # Store just the letter (A, B, C, D)
+                                st.session_state.user_answers[idx] = selected_option[0]
+                            
+                            st.divider()
+                        
+                        # Check if all questions are answered
+                        all_answered = len(st.session_state.user_answers) == len(questions)
+                        
+                        # Submit button
+                        col1, col2 = st.columns([4, 1])
+                        with col2:
+                            if all_answered:
+                                if st.button("Submit Quiz"):
+                                    # Calculate score
+                                    correct = 0
+                                    for q_idx, user_answer in st.session_state.user_answers.items():
+                                        if q_idx < len(questions):
+                                            correct_answer = questions[q_idx].get("answer", "")
+                                            if user_answer == correct_answer:
+                                                correct += 1
+                                    
+                                    st.session_state.score = correct
+                                    st.session_state.quiz_submitted = True
+                            else:
+                                st.warning("Please answer all questions before submitting.")
+                    
+                    # If quiz is submitted, show results
+                    else:
+                        st.subheader("Quiz Results")
+                        
+                        total_questions = len(questions)
+                        score_percentage = (st.session_state.score / total_questions) * 100 if total_questions > 0 else 0
+                        
+                        # Display score with progress bar
+                        col1, col2, col3 = st.columns([1, 2, 1])
+                        with col2:
+                            st.metric("Your Score", f"{st.session_state.score}/{total_questions} ({score_percentage:.1f}%)")
+                            
+                            # Score progress bar
+                            st.progress(score_percentage / 100)
+                            
+                            # Feedback based on score
+                            if score_percentage == 100:
+                                st.success("Perfect score! Excellent understanding of the video content!")
+                            elif score_percentage >= 80:
+                                st.success("Great job! You have a good understanding of the video content.")
+                            elif score_percentage >= 60:
+                                st.info("Good effort! Review the video again to improve your understanding.")
+                            else:
+                                st.warning("You might want to rewatch the video to better understand the content.")
+                        
+                        # Review answers
+                        st.subheader("Review Your Answers")
+                        
+                        for idx, question_data in enumerate(questions):
+                            question_text = question_data.get("question", f"Question {idx+1}")
+                            options = question_data.get("options", [])
+                            correct_answer = question_data.get("answer", "")
+                            user_answer = st.session_state.user_answers.get(idx, "Not answered")
+                            
+                            st.write(f"**Question {idx + 1}:** {question_text}")
+                            
+                            # Format options consistently
+                            display_options = []
+                            for i, option in enumerate(options):
+                                if not option.startswith(("A. ", "B. ", "C. ", "D. ")):
+                                    option_letter = chr(65 + i)  # Convert to A, B, C, D
+                                    display_options.append(f"{option_letter}. {option}")
+                                else:
+                                    display_options.append(option)
+                            
+                            # Display each option with color coding
+                            for i, option in enumerate(display_options):
+                                option_letter = option[0] if option else ""
+                                
+                                if option_letter == correct_answer:
+                                    st.markdown(f"✅ **{option}**")
+                                elif option_letter == user_answer and user_answer != correct_answer:
+                                    st.markdown(f"❌ ~~{option}~~ (Your answer)")
+                                else:
+                                    st.write(f"   {option}")
+                            
+                            st.divider()
+                        
+                        # Restart button
+                        col1, col2, col3 = st.columns([1, 2, 1])
+                        with col2:
+                            if st.button("Take Another Quiz"):
+                                st.session_state.quiz_data = None
+                                st.session_state.user_answers = {}
+                                st.session_state.quiz_submitted = False
+                                st.session_state.score = 0
+                
+                # Handle if the quiz response isn't in the expected format
+                elif 'quiz' in st.session_state and st.session_state.quiz:
+                    # If the quiz is stored as markdown, just display it
+                    st.markdown(st.session_state.quiz)
+            # Show a message if no quiz is generated yet
+            elif 'quiz' not in st.session_state or not st.session_state.quiz:
+                st.info("Click 'Generate Quiz' to create a quiz based on the video content.")
+
+
+
 else:
     st.info("Enter the required API keys in the sidebar to get started")
