@@ -344,6 +344,16 @@ Instructions:
 4. After all questions, provide the correct answers in a separate answer key.
 5. Format the quiz clearly with proper spacing and numbering.
 6. Ensure all questions are focused on the most important points from the video.
+. Provide the output as a valid JSON object with the following structure:
+
+```json
+{{
+    "quiz": [
+        {{"question": "Question 1", "options": ["A", "B", "C", "D"], "answer": "A"}},
+        {{"question": "Question 2", "options": ["A", "B", "C", "D"], "answer": "C"}},
+        ...
+    ]
+}}
 
 Your quiz:
 """
@@ -576,7 +586,9 @@ if gemini_api_key and assemblyai_api_key:
             st.subheader("Knowledge Quiz")
             if st.button("Generate Quiz"):
                 with st.spinner("Creating educational quiz based on video content..."):
-                    quiz = generate_quiz()
+                    quiz = generate_quiz() 
+                    ### quiz->jason 
+                    #FUNCTION TO DISPLAY QUIZ 
                 st.markdown(quiz)
             elif st.session_state.quiz:
                 st.markdown(st.session_state.quiz)
