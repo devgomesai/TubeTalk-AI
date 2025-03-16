@@ -11,10 +11,10 @@ This makes it easier to grasp the main points without watching the full video.
 
 Screenshots
 
-![Screenshot 1](image1.png)
-![Screenshot 2](image2.png)
-![Screenshot 2](image3.png)
-![Screenshot 2](image4.png)
+![Screenshot 1](imgs/image1.png)
+![Screenshot 2](imgsimage2.png)
+![Screenshot 2](imgs/image3.png)
+![Screenshot 2](imgs/image4.png)
 
 Features
 ✅ Extracts YouTube transcripts
