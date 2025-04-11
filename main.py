@@ -149,7 +149,7 @@ def download_audio(youtube_url):
 # Tool: Transcribe Audio with AssemblyAI
 def get_transcription(youtube_url):
     with st.spinner("Initiating transcription with AssemblyAI..."):
-        if not aai.api_key:
+        if not aai.settings.api_key:
             return "AssemblyAI API key is required for transcription", None
 
         video_id = get_video_id(youtube_url)
