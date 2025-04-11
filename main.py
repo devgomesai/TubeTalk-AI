@@ -269,6 +269,7 @@ You are an AI assistant specialized in answering questions about YouTube videos 
    - 🎤 For interviews or discussions  
    - ⚔️ For intense or competitive moments  
    - 😂 For humorous or lighthearted sections  
+   - Remember that while answering dont mention the word *transcripts* talk like you are alligned with the video.
 
 ### ✅ Your Answer:
 """
