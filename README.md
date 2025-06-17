@@ -66,7 +66,7 @@ Want to run **TubeTalk** on your machine? Follow these steps 🧩:
 
 5. **Run the app**  
    ```bash
-   streamlit run main.py
+   streamlit run main/main.py
    ```
 
 ---
