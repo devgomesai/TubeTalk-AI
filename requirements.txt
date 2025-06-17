@@ -1,0 +1,11 @@
+streamlit
+youtube-transcript-api
+yt-dlp
+langchain
+langchain-community
+langchain-google-genai
+assemblyai
+faiss-cpu
+google-auth
+pandas
+python-dotenv
