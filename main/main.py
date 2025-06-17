@@ -103,6 +103,7 @@ def get_youtube_transcript(video_url):
         return "Invalid YouTube URL"
     try:
         transcript = YouTubeTranscriptApi.get_transcript(video_id)
+        transcripts_dir = os.path.join(os.getcwd(), "transcripts")
         if not transcript or len(transcript) == 0:
             update_status("Transcript is empty")
             return "Transcript is empty"
@@ -115,7 +116,8 @@ def get_youtube_transcript(video_url):
             seconds = int(timestamp % 60)
             text = entry["text"]
             full_text += f"[{minutes:02d}:{seconds:02d}] {text} "
-        
+        with open(f"{transcripts_dir}/{video_id}", "w", encoding="utf-8") as f:
+            f.write(full_text)
         update_status("Successfully retrieved transcript from YouTube")
         return full_text
     except Exception as e:
@@ -182,6 +184,7 @@ def get_transcription(youtube_url):
         if transcript_obj.text:
             with open(transcript_path, "w", encoding="utf-8") as f:
                 f.write(transcript_obj.text)
+            print(f"Transcription done at : {transcript_path}")
             st.session_state.video_title = video_title
             return transcript_obj.text, video_title
 
@@ -277,7 +280,7 @@ You are an AI assistant specialized in answering questions about YouTube videos 
         update_status(f"Error generating answer: {str(e)}")
         return f"Error generating answer: {str(e)}"
 
-# Tool: Summarize YouTube Video (improved) /// https://github.com/DevRico003/youtube_summarizer
+# Tool: Summarize YouTube Video
 def summarize_video():
     update_status("Generating video summary...")
     if "transcript" not in st.session_state or not st.session_state.transcript:
