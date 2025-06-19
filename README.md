@@ -13,8 +13,6 @@
 
 No more watching entire videos just to find key points! 🚀
 
-🔗 **Try it now**: [TubeTalk App](https://tubetalk.streamlit.app/)
-
 ---
 
 ## 🖼️ Screenshots
