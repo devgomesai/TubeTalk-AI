@@ -1,0 +1,286 @@
+[00:00] Ronnie Vasishta, SVP of Telecom at NVIDIA: Very 
+pleased to be with you here today. Let me start   [00:10] off by saying the future telco is an AI native 
+telco. Easy to say, but as I'm going to go through   [00:21] this in the next 40 minutes or so, it’s actually 
+starting to show how we can make that happen. But   [00:31] we've still got to go through a few transitions to 
+make that happen. So firstly, the concept of an AI   [00:39] native telco is a telco that's able to leverage 
+AI for operations, for customer experience,   [00:49] and for the acceleration of innovation. For those 
+of you who are telcos or have been in the telco   [00:56] industry, you know that often it's hard to really 
+innovate when you're also having to operate.   [01:05] As we've seen in NVIDIA, this AI era that 
+we're entering into has really been an exciting   [01:14] era for telcos. One hundred fifty telcos around 
+the world, 90% of the top 50 telcos are now   [01:24] working with NVIDIA. In a recent report that we 
+commissioned or carried out earlier this year, 97%   [01:34] of the 450 telecom professional respondents said 
+that they are already using or planning to use AI. [01:45] Let's understand why as we watch this video: For 
+decades, telecom networks have been the lifeline   [01:55] of our world. Always there, always reliable. But 
+now, we are at the tipping point for the future of   [02:04] communication. Telcos are evolving into something 
+more. AI-powered grids that don't just connect,   [02:13] they think, adapt, and solve. Customer 
+experiences and network operations are   [02:20] being reimagined with AI agents. AI factories 
+are accelerating research, redefining innovation,   [02:34] and unlocking new possibilities for industries and 
+nations. What were once simple relays are now AI   [02:45] powerhouses. Cell towers transforming signals 
+into intelligence for billions. 5G and 6G are   [02:53] being trained, simulated, and deployed with AI, 
+making every connection smarter, every interaction   [03:01] more seamless. This isn't just an upgrade. It's 
+a renaissance. Telcos are no longer just the   [03:10] backbone. They're powering what's next in physical 
+AI, robotics, and beyond. AI is defining our   [03:19] future. And the future moves on telecom networks. 
+The only question is how far can we go together? [03:31] The question of how far can we go 
+together? Let me ask you a few questions. [03:39] Do you believe that one day we will all have 
+the ability to talk to our agent on our phone?   [03:48] That we will all be able to do this, thousands of 
+people at a time, millions of people at a time? If   [03:57] you do, then you know that the connectivity to 
+enable that to happen means millions of links. [04:04] Do you believe that our cities and our spaces 
+will be safer because of video traffic? That   [04:12] video search and summarization at the edge of 
+the network will be able to provide insights   [04:18] into traffic patterns, into alerts about issues 
+happening? That video needs to be uplinked to   [04:30] an edge network for that action to be achieved? 
+Again, millions of high bandwidth connections. [04:39] Do you believe that robo-taxis will 
+be deployed across the nations? That   [04:46] these robo-taxis will need to know where they 
+are at all times and sometimes take actions   [04:53] depending on where they are? Again, millions 
+of real-time or near real-time connections. [05:01] And do you believe that our 
+spaces, our private spaces,   [05:04] our public spaces like ports and airports, 
+will all have some form of robotics?   [05:13] Whether it be drones or automated robots for 
+manufacturing or other types of applications,   [05:20] will all need to be connected and we'll need 
+to get insights and retrain those robots. [05:27] Do you believe that the next frontier of 
+our society will be driven and enabled by   [05:36] access to robotics, whether it be at the 
+home or in business? And these robots will   [05:42] need to be connected, often connected to 
+each other, but many times connected to   [05:48] a network such that we know where they are, 
+what they're doing, and we can retrain them   [05:53] and deploy that retraining into their 
+brains, as we saw from Jensen yesterday? [06:00] Well, if you believe all of that and if you think 
+about the last time you were at an event and you   [06:08] tried to get a connection on your phone, you 
+tried to uplink video to your friends or family,   [06:16] you can see the journey that we need to go 
+through, and we need to go through it very,   [06:24] very quickly. AI gets us there, and AI 
+accelerates it. We will have to have hundreds   [06:35] of billions of connections, real-time, 
+near real-time. How does that happen? [06:46] Telecom networks—and this is a key phrase—really 
+become the intelligence fabric, not just the   [06:54] connectivity fabric, but the intelligence fabric 
+across consumers, enterprises, nations. They   [07:03] transition from just having connectivity to having 
+intelligence embedded within that connectivity so   [07:12] that we can connect to healthcare, education, 
+transportation, and all the things that we know   [07:18] are critical but we can also embed compute-based 
+intelligence into those networks. This transition   [07:29] from connectivity provider to intelligence fabric 
+provider is enabled by software-defined networks. [07:45] If you think about the muscles that telcos have 
+today, there will need to be some strengthening   [07:52] of those muscles. We're starting to 
+see that strengthening already happen,   [07:58] as I will come on to, and we will 
+need to build some new muscles. [08:04] Sovereignty: telcos are really trusted as the 
+critical providers of critical infrastructure   [08:12] within their regions. They’re trusted. The last 
+mile reach, whether it be broadband or wireless,   [08:21] that last mile reach is often the critical 
+domain of telcos. And one thing that's   [08:29] really critical is determinism in the network. 
+When you think about near real-time, real-time   [08:36] applications that I talked about, the compute 
+cycle required there has to be as deterministic   [08:45] as the connectivity. Telcos have the determinism 
+capability, and now there's a whole new muscle   [08:55] development that needs to happen, and that's an 
+ecosystem. Some of that's starting to happen,   [09:02] and we're seeing today how that ecosystem is 
+starting to transition into an AI native approach. [09:10] Critical also is the use of a 
+homogeneous infrastructure. This is   [09:16] one infrastructure—hardware and software—that is 
+flexible and can be provisioned for use and can   [09:27] be upgraded in a flexible way. I'll come on 
+to what I mean by that right now. That's the   [09:33] first building block of what it takes to be 
+an AI native telco: a homogeneous, scalable,   [09:42] accelerated infrastructure for any workload. 
+Of course, there's hardware at the base of   [09:49] that infrastructure. Actually, you could even 
+say the base is real estate and power, and we   [09:55] build hardware as a result of having that base. 
+But on top of that is a disaggregated software   [10:04] layer that can access that hardware. And 
+that disaggregated software layer can run   [10:09] applications—an application like radio access 
+network but also some of these applications that   [10:15] you saw talked about in terms of the libraries 
+that Jensen talked about in his keynote yesterday. [10:25] The good news is that this isn't all the 
+future—it is the now. Eighteen telcos   [10:33] around the world have moved from only generating 
+revenue by ARPU to generating revenue by tokens.   [10:43] It's happening. Telcos have found that new 
+revenue stream; they are already dependent   [10:51] on their region. They are dependent. 
+They are sovereign. They are trusted   [10:56] deployers of critical infrastructure. They 
+are also providing the ability to generate,   [11:04] as I said, new revenue. But the key thing in 
+all of this is that the telcos themselves are   [11:11] developing those muscles to enable them to 
+provide that infrastructure in their region. [11:19] Let's just go through a few examples. [11:22] Swisscom: Swisscom with their Swiss AI platform   [11:27] really built that infrastructure back in 
+November of last year—GPU as a service.   [11:35] They've transitioned through that GPU 
+as a service and were able to now,   [11:40] in January of this year, to have an AI workhub 
+where they could bring in and really develop AI   [11:48] applications. As they go on this journey, they’re 
+moving to more platform as a service as well. [11:56] Telenor: Telenor, working with Capgemini, 
+has developed on their infrastructure   [12:05] the ability to provide 100-plus instant 
+translation languages. How critical is that? The   [12:13] first example being the use of the Red Cross. This 
+is an enterprise that's already taken advantage of   [12:23] the infrastructure and a partner that's developed 
+a really useful application on top of it. [12:31] FASTe: FASTe is on to version two of 
+their MIA Italian language model. Just   [12:40] some examples of how quickly we're moving through. [12:44] I'm very pleased to announce that Orange has 
+joined the NVIDIA Cloud Partner Program. The   [12:53] NVIDIA Cloud Partner Program is a program by 
+which we're able to transition very quickly a   [13:01] company through that learning cycle. Orange 
+themselves already have transitioned. They   [13:07] have taken their live intelligence platform that 
+was developed and proven and learned using that   [13:16] platform internally with all their employees 
+and are now taking that out into the open   [13:22] market. So learn by doing is really a good 
+way of thinking about how to develop those   [13:29] muscles as you go to market with generative AI 
+solutions to the enterprise. Trusted is really   [13:38] critical for this service. Responsible 
+is really critical for this service.   [13:44] And, of course, accessibility created by the 
+infrastructure and the connection to businesses. [13:51] STC Solutions: STC Solutions has already announced 
+that they’re becoming an NVIDIA Cloud Partner.   [13:59] STC Solutions will be developing and delivering 
+their services in their design center this year.   [14:08] This is starting off as GPU as a 
+service but also moving to platform as   [14:14] a service. STC Solutions has a very wide 
+reach and is now adding their services   [14:21] capability to the NVIDIA Cloud Partner 
+Program—solutions as well as hardware and   [14:28] NVIDIA AI Enterprise and the NVIDIA NIMs 
+and everything that goes on top of that. [14:33] A very interesting example of this new 
+muscle development of infrastructure   [14:38] deployment is Telefónica. Telefónica is 
+going to be deploying, as part of the   [14:48] NVIDIA Cloud Partner Program, distributed 
+intelligence meeting the requirements and   [14:56] conforming to those of some of the 
+digital initiatives within Spain.   [15:02] The distributed infrastructure provides 
+infrastructure closer to the point of use   [15:07] but also is enabling data sovereignty for the 
+enterprise that's using that infrastructure. [15:19] Building block number one was the homogeneous 
+infrastructure. Building block number two is   [15:27] the enablement of autonomous operations. 
+It’s autonomous operations for networks,   [15:37] customers, and employees. The ability for 
+a telco to take large language models,   [15:50] deploy those large language models—really 
+starting off in some customer experience   [15:56] engagements—and of course that's very 
+important and transitions across industries. [16:04] Now, as we enter the era of reasoning, 
+we can start to see how agentic flows are   [16:13] becoming really critical to network 
+operations. This is perhaps one of   [16:17] the most critical areas of any telco, 
+and reasoning enables that to happen. [16:25] I'm going to show you a few very 
+interesting examples of how our   [16:30] partner network—already 10 partners 
+today—have developed network operation   [16:37] solutions based on agentic flows across 
+at least 50-plus different applications. [16:47] Just some examples of the performances and 
+capabilities that we're already seeing:   [16:54] a 2x ROI, 22% capital savings, a 63% average 
+call handling time reduction, and a reduction in   [17:12] meantime to resolution. These are real-world 
+numbers that are being achieved already. [17:21] I'm very pleased to announce that NVIDIA 
+is now releasing our first AI blueprint for   [17:34] network operations. This is an incredible 
+step forward. The Telco AI blueprint is   [17:43] enabling network engineers to reconfigure 
+and configure parameters for the first time   [17:50] through an agentic flow. If you think about the 
+complexity of configuring parameters and how you   [18:00] can now do that in an automated way through 
+agentic flow, it really is the essence of   [18:06] AI—making something so complex so simple—and 
+the ability to do this real-time dynamically,   [18:16] something that normally takes days to do. You can 
+adjust the network dynamically to changing needs. [18:25] The blueprint comes in the form of documentation, 
+reference architectures, and is NIMified to enable   [18:36] ease of use and high performance. A really 
+important step forward for network operations. [18:46] Our ecosystem and the ecosystem of partners 
+that we're building is second to none,   [18:54] and many of these partners are focusing on telco 
+because telco is in such need of AI. So, I'm very   [19:04] pleased to announce that Accenture is announcing 
+their Network Operations Center Agentic AI app.   [19:13] Think of this as a hierarchy of agents: super 
+agents and worker agents below—all constantly   [19:23] in communication, all actually able to be 
+visualized through digital twin technology.   [19:32] The first implementation is to assist 
+ticket deflection and alarm suppressions. [19:42] Also pleased to announce that TCS is bringing 
+to market their AI Native Telco Suite.   [19:50] The AI Native Telco Suite really deals with 
+network operations, customer experience,   [20:02] and IT. These agents are now building upon 
+the large language models—the NVIDIA Nemo   [20:14] and NIM. It’s a really advanced operation 
+that TCS brings to their telecom suite. [20:24] Infosys is announcing their Smart Network 
+Assurance Agent. This is a network assurance   [20:37] agent that uses both Mistral, reasoning models 
+built on Mistral, and reasoning models built on   [20:47] Nemotron. This agentic flow is able to leverage 
+reasoning to build full guardrails as well. [21:02] NTT Data—we thank those in the audience 
+from NTT Data as well—are announcing the   [21:08] end-to-end network alarm management. This 
+is where network alarms that traditionally   [21:15] come off the network from the network 
+equipment providers can now be dealt with,   [21:23] really for autonomous operations. The 
+first case is, as I said, end-to-end   [21:29] alarm management, which is really critical in 
+a network operation. An agentic flow can take   [21:34] care of many of these alarms that are very 
+complex and very hard to decipher otherwise. [21:43] Proda is another example: think of it as 
+three personas that have nine agents below   [21:54] them—the field engineer, network operations 
+center engineer, and network engineer. These   [22:02] engineer personas are taken care of in an 
+agentic flow that are all talking to each   [22:08] other. Many of these are quite complex but the 
+NIM that underlines this enables those agents   [22:16] to be deployed efficiently and with high 
+performance. This is called Agent Squad. [22:30] Building block number two was really the ability   [22:33] to provide automated operations on 
+that homogeneous infrastructure. [22:47] Building block number three again uses 
+that homogeneous infrastructure. Now   [22:53] we're building a network. A network that is 
+able to really do that last mile connectivity   [23:01] where we can build both 5G and moving forward 
+to AI native 6G on top of that infrastructure. [23:11] We've talked a little bit about the create aspect; 
+we've talked about the consume aspect. Now within   [23:21] that network, remember that intelligence 
+fabric network, we're going to talk about   [23:28] the distribution piece of that: how do we gain 
+access? How do we distribute intelligence across   [23:36] that intelligence fabric? On this network, 
+there are really two types of traffic:   [23:46] traditionally there has always been voice, 
+video, and data. Now we have AI traffic   [23:55] going over the RAN—the Radio Access Network. 
+But we can also have traffic coming from the   [24:04] central data center as well. So there are 
+endpoints, traffic coming over the airwaves,   [24:11] over broadband, and also traffic being diverted 
+to those distribution networks. That is quite a   [24:22] powerful capability because it’s a homogeneous 
+architecture that’s software defined. We’re   [24:28] able to distribute that intelligence across the 
+entire continuum of what you can call the grid. [24:40] When it comes to inferencing—which we already 
+are doing often by the cloud—the service level   [24:47] agreements required for many applications 
+will require that intelligence to be located   [24:54] at different points in the network. It’s not 
+just latency but the ability to provide that   [25:07] homogeneous infrastructure that can be provisioned 
+according to use models, time of day, performance,   [25:18] SLA, and priorities as software-defined 
+orchestration, which is really critical. [25:27] I already started to talk about 6G. Why? 
+Because 6G standards are being formed now.   [25:37] There have already been the first 3GPP standards 
+meetings where 6G is being defined. Some of the   [25:45] key tenants coming out of those discussions 
+are all built on AI. The ability to leverage   [25:55] AI for the 6G standards was unprecedented 
+in previous generations. But when you   [26:02] think about the limited amount of spectrum 
+that we have, spectral efficiency is very   [26:10] important. To improve spectral efficiency, 
+we create concepts of integrated sensing. [26:19] Traditional wireless networks have delivered 
+essentially based on static algorithms,   [26:26] but that doesn’t make sense. The world 
+is changing. Rural environments are   [26:33] different. Sometimes it’s got thousands of people,   [26:36] sometimes it doesn't. It rains. Sometimes 
+there are trees in certain areas. What we   [26:41] can do now is use the radio network as a sensor 
+to sense all those applications and dynamically   [26:48] adjust by having AI/ML in the signal path the 
+spectrum availability and the spectrum usage. [26:56] Just think of that spectral efficiency 
+created by AI. Of course, the inclusion   [27:03] now of non-terrestrial networks as 
+an overlay to the cellular network. [27:10] Something really exciting is the use of 
+semantic communications. We’re already   [27:17] seeing research that we hope will 
+get into deployment. Think about   [27:23] semantic communications. I don’t need to 
+transmit a thousand bits. I can transmit   [27:29] one bit because you know what I’m going 
+to say. You know who I am. Why do I need   [27:33] to transmit everything? I can reconfigure 
+using AI at either end. A tangential shift. [27:41] Let’s see just a video that explains some of this: [27:49] The journey to AI native wireless networks 
+has begun. Traditional wireless systems   [27:54] rely on fixed algorithms that are hard to 
+scale and slow to adapt. NVIDIA AI Aerial   [28:01] changes that. Neural networks learn from data, 
+adapt in real time, and scale with complexity,   [28:08] boosting spectral efficiency, lowering costs, 
+and improving connectivity. Building AI native   [28:15] wireless networks takes three key steps: 
+training, simulation, and deployment. NVIDIA   [28:23] AI Aerial unifies all three, making it easier 
+to build, test, and deploy AI models faster. [28:31] Here's how it works: We train a neural 
+network model using NVIDIA Showna and   [28:36] Aerial Radio frameworks. This model replaces 
+the traditional 5G channel estimation algorithm.   [28:42] Next, we simulate and optimize it at city scale, 
+testing thousands of real-world scenarios in the   [28:49] Aerial Omniverse digital twin. The result: nearly 
+double the cell throughput with AI on. Then we   [28:58] deploy the trained model on a live 5G network 
+at NVIDIA using Aerial RAN Compute. The result:   [29:06] 100% higher throughput with AI. Because 
+the model connects to a digital twin,   [29:11] it keeps learning, continuously improving 
+over time. This feedback loop between the   [29:17] physical and virtual worlds helps the 
+AI evolve faster and get smarter with   [29:22] every cycle. With the Showna research kit on 
+NVIDIA Jetson, developers can go from code   [29:28] to a working AI model in a live 5G network 
+in a few hours with just six lines of code. [29:35] This is just the beginning of AI native 
+wireless networks. As models improve, they'll   [29:40] boost capacity, unlock new applications, increase 
+efficiency, and extend coverage to more people. [29:47] Join the NVIDIA 6G Developer Program to 
+accelerate your AI native wireless research. [29:55] Who thought that was amazing? The world is 
+really about to change. We just don’t know   [30:03] how much it's going to change. We’re 
+starting to see the ability to connect   [30:09] all those billions of things is starting to 
+really happen. It's not just vision anymore. [30:16] This journey, while it sounds like 
+it’s been a long time in coming,   [30:22] is accelerating rapidly. What we call AI 
+RAN—not NVIDIA but the telecom industry—AI   [30:35] RAN is AI fused with the Radio Access 
+Network. It really is gaining pace. [30:41] We've seen the NVIDIA 6G Developer Program,   [30:44] which you can see demonstrations of on the 
+floor in the NVIDIA booth—I encourage you   [30:49] all to go see that. The 6G Developer Program 
+accelerated in a year to over 2,000 members. [30:58] We’ve also engaged with some of the leading 
+industry luminaries in forming the AI RAN   [31:03] Alliance, which went from an initial 
+10 members just over a year ago to now   [31:08] officially 75 member companies. We’re really 
+moving quickly through these new partnerships. [31:15] Recently we announced the AI WIND project 
+in the US with some key partners. The sole   [31:23] point is to develop blueprints for AI native 
+6G that can be put forward into the standards. [31:32] We have some network functions being developed 
+in our ecosystem on top of NVIDIA hardware,   [31:40] and are pleased to see some of 
+our key partner names on there. [31:44] But not just that, we have some telcos 
+really leaning into this concept of,   [31:51] not just what I mentioned earlier—which 
+is AI infrastructure for token generation   [31:57] and monetization—but also really leaning 
+into the fusion of AI and RAN together. [32:07] Indonesia’s IOH with around 280 million people 
+spread across archipelagos: why wouldn’t they fuse   [32:17] AI and RAN together to deliver education services, 
+health services using AI to their population? [32:27] T-Mobile in the US is working on the ability   [32:31] to put AI and RAN together in 
+their mobile switching offices. [32:38] SoftBank, who's already demonstrated the   [32:41] importance of latency at the edge in 
+Japan on some of their field trials. [32:50] At the key of all of this, continuing 
+the theme of homogeneous infrastructure,   [32:58] we now build the software-defined 
+Radio Access Network stack on top. [33:06] Traditionally, as we all know, 
+RAN has required a proprietary,   [33:13] single-use network. It delivers RAN, 
+and that’s what it does. Telcos spend   [33:22] billions of dollars of capex on that 
+and monetize it through connectivity. [33:30] Now, that same infrastructure can 
+run AI applications and monetize   [33:36] through tokens and it’s provisioned accordingly. [33:42] As you go out onto the floor, you’ll see 
+different formats of our hardware architecture. [33:49] The same applies here: Aerial RAN 
+Compute you saw can be racked and   [33:55] stacked in a mobile switching office. 
+It can actually sit at a base station. [34:00] But if you’re just running RAN and a small amount 
+of AI, why not use the ARC Compact? It’s a small,   [34:09] low power system that can sit at the base 
+of a base station and run AI if needed. [34:18] The video you saw earlier and 
+what we talked about regarding 6G. [34:24] I'm really pleased to announce that 
+many researchers across Europe—200   [34:33] institutions in 33 countries—are already 
+leveraging NVIDIA tools and capabilities   [34:43] to do their fundamental research, their 
+best work, and create their breakthroughs. [34:50] The democratization of this research is 
+vital. Research shouldn't just be in the   [34:56] domain of a few because that’s often not 
+the way the best ideas come to production. [35:04] We now have 190,000 downloads 
+of what you saw on the Showna,   [35:10] which is a link layer simulator 
+that can run on any infrastructure. [35:22] Earlier this week, we announced a 
+relationship with the Department   [35:26] of Science, Innovation and 
+Technology (DSIT) in the UK. [35:31] Specifically, that we signed is bringing 
+a very close partnership between   [35:39] NVIDIA and the key academic research 
+institutions across the UK, together,   [35:51] and DSIT is empowering that collaboration. [35:57] We are bringing these tools and capabilities   [36:00] to those researchers. This is just one of 
+many ways that we are bringing AI skills,   [36:11] AI tools, and AI infrastructure to those 
+researchers and people that need it. [36:18] The fourth building block 
+of an AI native telco is—as   [36:24] you would imagine—a digital twin. 
+Digital twins enable simulation. [36:33] You saw the three-computer system. 
+The three-computer system requires   [36:39] a physically accurate, often 
+photon-accurate environment in   [36:46] which you can simulate. Exactly the 
+same is true for the wireless world. [36:53] The laws of physics apply to RF. We 
+need to know how RF reflects, absorbs,   [37:02] is absorbed, refracts from properties 
+such as concrete or glass or foliage   [37:08] in different weather systems. This can 
+all now be done within the digital twin. [37:15] But as I mentioned earlier, digital twins are also   [37:20] used for network operations and the 
+visualization of network operations. [37:25] Now you're starting to see what I 
+mentioned earlier—that the fusion   [37:30] of network operations AI across 
+all parts of the network and   [37:36] the operations can be simulated and 
+visualized within the digital twin. [37:45] What we're really saying now is that AI 
+native telco brings many layers together:   [37:54] the infrastructure layer; the networking 
+layer—think about that as the distribution   [38:01] layer; the inferencing layer, bringing 
+in external AI workloads, for instance;   [38:07] but then the agentic flows that work on top 
+of that layer on the same infrastructure. [38:14] You've seen network operations, customer 
+experience—these are critical to really deploy. [38:24] And then, of course, the connectivity to 
+consumers, to enterprises, and to nations. [38:31] This is the template for AI native telco 
+building at scale—new efficiencies that   [38:44] enable us to achieve those early concepts 
+that I showed you—and it’s happening now. [38:52] What we need to do, what you need to do is 
+decide when and where you get onto this journey. [39:00] Many are already on the journey. The 
+question isn’t if now; the question is when. [39:08] The destination of an AI 
+native telco is not far away,   [39:12] and I’m very pleased if you’re able 
+to join that journey with NVIDIA. [39:19] Thank you. [Applause] 

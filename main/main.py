@@ -1,5 +1,6 @@
 import streamlit as st
 import os
+import asyncio
 from urllib.parse import urlparse, parse_qs
 from youtube_transcript_api import YouTubeTranscriptApi
 import yt_dlp
@@ -36,7 +37,7 @@ if gemini_api_key:
     os.environ["GOOGLE_API_KEY"] = gemini_api_key
 if assemblyai_api_key:
     os.environ["ASSEMBLYAI_API_KEY"] = assemblyai_api_key
-    aai.api_key = assemblyai_api_key
+    aai.settings.api_key = assemblyai_api_key
 
 # Function to update status message
 def update_status(message):
@@ -49,7 +50,9 @@ def update_status(message):
 @st.cache_resource(show_spinner=False)
 def get_embeddings():
     try:
-        return GoogleGenerativeAIEmbeddings(model="models/text-embedding-004", google_api_key=gemini_api_key)
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+        return GoogleGenerativeAIEmbeddings(model="models/gemini-embedding-exp-03-07", google_api_key=gemini_api_key)
     except Exception as e:
         st.sidebar.error(f"⚠️ Error initializing embeddings: {str(e)}")
         return None

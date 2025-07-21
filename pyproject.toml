@@ -1,0 +1,19 @@
+[project]
+name = "tubetalk"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "assemblyai>=0.42.0",
+    "faiss-cpu>=1.11.0.post1",
+    "google-auth>=2.40.3",
+    "langchain>=0.3.26",
+    "langchain-community>=0.3.27",
+    "langchain-google-genai>=2.1.8",
+    "pandas>=2.3.1",
+    "python-dotenv>=1.1.1",
+    "streamlit>=1.47.0",
+    "youtube-transcript-api>=1.1.1",
+    "yt-dlp>=2025.6.30",
+]
