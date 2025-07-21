@@ -71,8 +71,15 @@ Want to run **TubeTalk** on your machine? Follow these steps 🧩:
    ```bash
    streamlit run main/main.py
    ```
+---
 
+## 🐳 Docker Version
 
+Prefer Docker? No problem. Just run:
+
+```bash
+docker-compose up
+```
 ---
 
 Enjoy smarter YouTube watching with **TubeTalk**! 🎧💡
