@@ -75,7 +75,7 @@ Want to run **TubeTalk** on your machine? Follow these steps 🧩:
 
 ## 🐳 Docker Version
 
-Prefer Docker? No problem. Just run:
+For Docker version just run the below command:
 
 ```bash
 docker-compose up
