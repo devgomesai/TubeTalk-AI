@@ -152,7 +152,7 @@ def download_audio(youtube_url):
 # Tool: Transcribe Audio with AssemblyAI
 def get_transcription(youtube_url):
     with st.spinner("Initiating transcription with AssemblyAI..."):
-        if not aai.api_key:
+        if not aai.settings.api_key:
             return "AssemblyAI API key is required for transcription", None
 
         video_id = get_video_id(youtube_url)
@@ -311,7 +311,7 @@ Instructions:
 3. Identify and summarize 3-5 key points or topics discussed in the video.
 4. Include any important conclusions or takeaways.
 5. Organize the summary with clear paragraph breaks and bullet points where appropriate.
-6. If timestamps are available in the transcript ([MM:SS]), include the most important ones.
+6. If timestamps are available in the transcript (e.g., 🕒 06:52 - 07:55), include the most important ones.
 
 Your summary:
 """

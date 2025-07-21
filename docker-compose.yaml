@@ -1,0 +1,13 @@
+version: "3.8"
+
+services:
+  tube-talk:
+    build: .
+    container_name: tube-talk-app
+    ports:
+      - "${STREAMLIT_PORT}:8501"
+    env_file:
+      - .env
+    volumes:
+      - .:/app
+    restart: unless-stopped
