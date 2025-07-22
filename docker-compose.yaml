@@ -3,6 +3,7 @@ version: "3.8"
 services:
   tube-talk:
     build: .
+    image: tube-talk
     container_name: tube-talk-app
     ports:
       - "${STREAMLIT_PORT}:8501"

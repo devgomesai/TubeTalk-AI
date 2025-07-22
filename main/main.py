@@ -566,7 +566,7 @@ if gemini_api_key and assemblyai_api_key:
     
     # If a video has been processed, show the analysis tabs
     if st.session_state.vectorstore is not None:
-        st.subheader(f"Analysis for: {st.session_state.video_title}")
+        # st.subheader(f"Analysis for: {st.session_state.video_title}")
 
         tab1, tab2, tab3 = st.tabs(["Q&A", "Summary", "Quiz"])
         
