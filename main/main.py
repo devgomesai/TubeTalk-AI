@@ -548,7 +548,6 @@ if st.session_state.status_message:
 else:
     st.sidebar.write("Ready to process video")
 
-# Only show the main UI if API keys are provided
 if gemini_api_key and assemblyai_api_key:
     # Main UI in a single column
     st.subheader("Enter a YouTube Video")
