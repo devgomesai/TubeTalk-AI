@@ -640,8 +640,20 @@ if gemini_api_key and assemblyai_api_key:
                     quiz = generate_quiz() 
                     ### quiz->json 
                     #FUNCTION TO DISPLAY QUIZ 
-                st.markdown(quiz)
-            elif st.session_state.quiz:
-                st.markdown(st.session_state.quiz)
+                if "quiz" in st.session_state:
+                    for i, q in enumerate(st.session_state["quiz"]["quiz"]):
+                        st.markdown(f"**Q{i+1}: {q['question']}**")
+                        user_answer = st.radio(
+                            f"Select your answer for Q{i+1}:",
+                            q["options"],
+                            key=f"q{i+1}"
+                        )
+                        # Optional: Show correct answer
+                        if user_answer:
+                            if user_answer.startswith(q["answer"]):
+                                st.success("✅ Correct!")
+                            else:
+                                st.error(f"❌ Incorrect. Correct answer is: {q['answer']}")
+                        st.markdown("---")
 else:
     st.info("Enter the required API keys in the sidebar to get started")
