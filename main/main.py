@@ -387,7 +387,19 @@ Instructions:
 Your quiz:
 """
     response = llm.invoke(prompt)
-    quiz = response.content
+    raw = response.content.strip()
+    # Strip markdown code fences if present
+    if raw.startswith("```"):
+        raw = raw.split("```", 2)[1]
+        if raw.startswith("json"):
+            raw = raw[4:]
+        raw = raw.rsplit("```", 1)[0].strip()
+    try:
+        import json
+        quiz = json.loads(raw)
+    except Exception:
+        update_status("Failed to parse quiz JSON")
+        return "Failed to parse quiz. Please try again."
     st.session_state.quiz = quiz
     update_status("Quiz generated successfully")
     return quiz
