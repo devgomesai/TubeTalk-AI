@@ -9,3 +9,4 @@ faiss-cpu
 google-auth
 pandas
 python-dotenv
+langchain_openai
