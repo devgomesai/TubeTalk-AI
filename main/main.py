@@ -44,7 +44,6 @@ if "vectorstore" not in st.session_state:
     st.session_state.transcript = None
     st.session_state.chat_history = []
     st.session_state.summary = None
-    st.session_state.quiz = None
     st.session_state.status_message = ""  # New: for displaying current operation status
 
 # API Keys section
@@ -344,66 +343,6 @@ Your summary:
     update_status("Summary generated successfully")
     return summary
 
-# Tool: Generate Quiz from YouTube Video (improved)
-def generate_quiz():
-    update_status("Generating quiz from video content...")
-    if "transcript" not in st.session_state or not st.session_state.transcript:
-        update_status("No transcript available")
-        return "Video not processed or transcript missing."
-        
-    if st.session_state.quiz:
-        update_status("Returning cached quiz")
-        return st.session_state.quiz
-        
-    llm = get_llm()
-    if llm is None:
-        update_status("LLM not available")
-        return "LLM is not available."
-        
-    prompt = f"""
-You are an expert educator. Based on the following YouTube video transcript and title, please generate a five-question multiple choice quiz.
-
-Video Title: {st.session_state.video_title}
-Transcript: {st.session_state.transcript[:50000]}  # Use first 50K characters if transcript is too long
-
-Instructions:
-1. Create 5 meaningful multiple-choice questions that test understanding of key concepts from the video.
-2. For each question, provide 4 options (A, B, C, D) with only one correct answer.
-3. Ensure questions vary in difficulty from basic recall to critical thinking.
-4. After all questions, provide the correct answers in a separate answer key.
-5. Format the quiz clearly with proper spacing and numbering.
-6. Ensure all questions are focused on the most important points from the video.
-. Provide the output as a valid JSON object with the following structure:
-
-```json
-{{
-    "quiz": [
-        {{"question": "Question 1", "options": ["A", "B", "C", "D"], "answer": "A"}},
-        {{"question": "Question 2", "options": ["A", "B", "C", "D"], "answer": "C"}},
-        ...
-    ]
-}}
-
-Your quiz:
-"""
-    response = llm.invoke(prompt)
-    raw = response.content.strip()
-    # Strip markdown code fences if present
-    if raw.startswith("```"):
-        raw = raw.split("```", 2)[1]
-        if raw.startswith("json"):
-            raw = raw[4:]
-        raw = raw.rsplit("```", 1)[0].strip()
-    try:
-        import json
-        quiz = json.loads(raw)
-    except Exception:
-        update_status("Failed to parse quiz JSON")
-        return "Failed to parse quiz. Please try again."
-    st.session_state.quiz = quiz
-    update_status("Quiz generated successfully")
-    return quiz
-
 # Intelligent Transcript Acquisition Logic
 def smart_get_transcript(url):
     """Intelligent function that tries multiple methods to get a transcript"""
@@ -437,9 +376,7 @@ def process_video(url):
         st.session_state.transcript = transcript  # save for summary/quiz later
         create_vectorstore(transcript)
         update_status(f"Video processing complete: {st.session_state.video_title}")
-        # Reset summary and quiz
         st.session_state.summary = None
-        st.session_state.quiz = None
         return True
     else:
         update_status("Failed to process video - could not obtain transcript")
@@ -479,14 +416,9 @@ def get_tools():
             description="Answers questions about the YouTube video based on its transcript."
         ),
         Tool(
-            name="summarize_video", 
-            func=summarize_video, 
+            name="summarize_video",
+            func=summarize_video,
             description="Generates a concise summary of the YouTube video using its transcript."
-        ),
-        Tool(
-            name="generate_quiz", 
-            func=generate_quiz, 
-            description="Creates a five-question multiple choice quiz based on the YouTube video transcript."
         )
     ]
 
@@ -608,8 +540,8 @@ if openai_api_key and assemblyai_api_key:
     if st.session_state.vectorstore is not None:
         # st.subheader(f"Analysis for: {st.session_state.video_title}")
 
-        tab1, tab2, tab3 = st.tabs(["Q&A", "Summary", "Quiz"])
-        
+        tab1, tab2 = st.tabs(["Q&A", "Summary"])
+
         with tab1:
             st.subheader("Ask Questions About the Video")
             user_question = st.text_input("Your question about the video:")
@@ -618,7 +550,7 @@ if openai_api_key and assemblyai_api_key:
                     response = chat_with_video(user_question)
                 st.markdown("### Answer:")
                 st.markdown(response)
-                
+
             if st.session_state.chat_history:
                 with st.expander("View Chat History", expanded=False):
                     for message in st.session_state.chat_history:
@@ -638,28 +570,5 @@ if openai_api_key and assemblyai_api_key:
                 st.markdown(summary)
             elif st.session_state.summary:
                 st.markdown(st.session_state.summary)
-
-        with tab3:
-            st.subheader("Knowledge Quiz")
-            if st.button("Generate Quiz"):
-                with st.spinner("Creating educational quiz based on video content..."):
-                    quiz = generate_quiz() 
-                    ### quiz->json 
-                    #FUNCTION TO DISPLAY QUIZ 
-                if "quiz" in st.session_state:
-                    for i, q in enumerate(st.session_state["quiz"]["quiz"]):
-                        st.markdown(f"**Q{i+1}: {q['question']}**")
-                        user_answer = st.radio(
-                            f"Select your answer for Q{i+1}:",
-                            q["options"],
-                            key=f"q{i+1}"
-                        )
-                        # Optional: Show correct answer
-                        if user_answer:
-                            if user_answer.startswith(q["answer"]):
-                                st.success("✅ Correct!")
-                            else:
-                                st.error(f"❌ Incorrect. Correct answer is: {q['answer']}")
-                        st.markdown("---")
 else:
     st.info("Enter the required API keys in the sidebar to get started")
