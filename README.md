@@ -9,7 +9,8 @@
 
 - ▶️ **Watch the video**
 - ✨ **Get an AI-generated summary**
-- 💬 **View live chat replay**
+- 💬 **Ask questions about the video content**
+- 📝 **Generate a knowledge quiz**
 
 No more watching entire videos just to find key points! 🚀
 
@@ -28,10 +29,22 @@ Take a peek at the interface!
 
 ## 🌟 Features
 
-✅ Extracts video transcripts
-✅ Generates AI summaries instantly
-✅ Shows live chat replay
-✅ Clean and user-friendly interface
+✅ Extracts video transcripts (via YouTube Transcript API)
+✅ Falls back to AssemblyAI audio transcription when captions aren't available
+✅ Semantic Q&A powered by FAISS vector search
+✅ AI-generated summaries and multiple-choice quizzes
+✅ Clean and user-friendly Streamlit interface
+
+---
+
+## 🤖 Powered By
+
+| Component | Model |
+|---|---|
+| LLM | `gpt-4o-mini` (OpenAI) |
+| Embeddings | `text-embedding-3-small` (OpenAI) |
+| Vector store | FAISS |
+| Fallback transcription | AssemblyAI |
 
 ---
 
@@ -42,35 +55,36 @@ Want to run **TubeTalk** on your machine? Follow these steps 🧩:
 1. **Clone the repository**
 
    ```bash
-   git clone https://github.com/gomesjonathan99/TubeTalk-.git
-   cd Tubetalk-
+   git clone https://github.com/devgomesai/TubeTalk-AI.git
+   cd TubeTalk-AI
    ```
+
 2. **Create and activate a virtual environment**
 
    ```bash
    python -m venv venv
-   # Activate it:
    # On Windows:
    venv\Scripts\activate
    # On macOS/Linux:
    source venv/bin/activate
    ```
-3. **Create a `.env` file** and add your OpenAI API key:
 
-   ```
-   ASSEMBLYAI_API_KEY=""
-   GEMINI_API_KEY=""
-   ```
-4. **Install dependencies**
+3. **Install dependencies**
 
    ```bash
    pip install -r requirements.txt
    ```
-5. **Run the app**
+
+4. **Run the app**
 
    ```bash
    streamlit run main/main.py
    ```
+
+5. **Enter your API keys in the sidebar**
+   - **OpenAI API Key** — [Get one here](https://platform.openai.com/api-keys)
+   - **AssemblyAI API Key** — [Get one here](https://www.assemblyai.com/) *(only needed when YouTube captions are unavailable)*
+
 ---
 
 ## 🐳 Docker Version
@@ -80,6 +94,7 @@ For Docker version just run the below command:
 ```bash
 docker-compose up
 ```
+
 ---
 
 Enjoy smarter YouTube watching with **TubeTalk**! 🎧💡
