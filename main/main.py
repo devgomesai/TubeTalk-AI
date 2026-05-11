@@ -1,19 +1,15 @@
 import streamlit as st
 import os
-import asyncio
 from urllib.parse import urlparse, parse_qs
 from youtube_transcript_api import YouTubeTranscriptApi
 import yt_dlp
 from langchain_community.vectorstores import FAISS
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain_google_genai import GoogleGenerativeAIEmbeddings
+from langchain_openai import OpenAIEmbeddings, ChatOpenAI
 import assemblyai as aai
-from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain.agents import create_tool_calling_agent
 from langchain.tools import Tool
 from langchain.prompts import ChatPromptTemplate
-import google.auth.exceptions
-import pandas as pd
 from dotenv import load_dotenv
 import mimetypes
 load_dotenv()
@@ -53,12 +49,12 @@ if "vectorstore" not in st.session_state:
 
 # API Keys section
 st.sidebar.header("API Configuration")
-gemini_api_key = st.sidebar.text_input("Gemini API Key", type="password")
+openai_api_key = st.sidebar.text_input("OpenAI API Key", type="password")
 assemblyai_api_key = st.sidebar.text_input("AssemblyAI API Key", type="password")
 
 # Save API keys to environment if provided
-if gemini_api_key:
-    os.environ["GOOGLE_API_KEY"] = gemini_api_key
+if openai_api_key:
+    os.environ["OPENAI_API_KEY"] = openai_api_key
 if assemblyai_api_key:
     os.environ["ASSEMBLYAI_API_KEY"] = assemblyai_api_key
     aai.settings.api_key = assemblyai_api_key
@@ -74,9 +70,7 @@ def update_status(message):
 @st.cache_resource(show_spinner=False)
 def get_embeddings():
     try:
-        loop = asyncio.new_event_loop()
-        asyncio.set_event_loop(loop)
-        return GoogleGenerativeAIEmbeddings(model="models/gemini-embedding-exp-03-07", google_api_key=gemini_api_key)
+        return OpenAIEmbeddings(model="text-embedding-3-small", openai_api_key=openai_api_key)
     except Exception as e:
         st.sidebar.error(f"⚠️ Error initializing embeddings: {str(e)}")
         return None
@@ -84,14 +78,14 @@ def get_embeddings():
 @st.cache_resource(show_spinner=False)
 def get_llm():
     try:
-        return ChatGoogleGenerativeAI(
-            model="gemini-1.5-flash", 
-            google_api_key=gemini_api_key,
-            temperature=0.2,  # Lower temperature for more focused answers
-            max_output_tokens=1024  # Ensure adequate response length
+        return ChatOpenAI(
+            model="gpt-4o-mini",
+            openai_api_key=openai_api_key,
+            temperature=0.2,
+            max_tokens=1024
         )
     except Exception as e:
-        st.sidebar.error(f"⚠️ Error initializing Gemini: {str(e)}")
+        st.sidebar.error(f"⚠️ Error initializing OpenAI: {str(e)}")
         return None
 
 # Helper function to extract YouTube video ID
@@ -228,7 +222,7 @@ def create_vectorstore(text):
     embeddings = get_embeddings()
     if embeddings is None:
         update_status("Failed to initialize embeddings")
-        return "Cannot create vector store: Gemini API key is required"
+        return "Cannot create vector store: OpenAI API key is required"
         
     # Improved chunking strategy for better context preservation
     text_splitter = RecursiveCharacterTextSplitter(
@@ -259,7 +253,7 @@ def chat_with_video(query):
     llm = get_llm()
     if llm is None:
         update_status("Gemini API key is required")
-        return "Cannot generate answer: Gemini API key is required"
+        return "Cannot generate answer: OpenAI API key is required"
     if not st.session_state.vectorstore:
         update_status("No vector database available")
         return "Please first process a video before asking questions"
@@ -528,8 +522,8 @@ def ask_agent(question):
     update_status(f"Processing your request: '{question}'...")
     agent = get_agent()
     if agent is None:
-        update_status("Cannot initialize agent: Gemini API key is required")
-        return "Cannot initialize agent: Gemini API key is required"
+        update_status("Cannot initialize agent: OpenAI API key is required")
+        return "Cannot initialize agent: OpenAI API key is required"
     
     try:
         inputs = {
@@ -553,12 +547,12 @@ def ask_agent(question):
 st.title("🎬 YouTube Video Analysis & Q&A")
 DEFAULT_WIDTH = 80
 # Check if API keys are provided
-if not gemini_api_key:
+if not openai_api_key:
     st.warning("""
-        ⚠️ **Please enter your Gemini API key in the sidebar to use this application.**
-        
-        You can obtain your API key from the following link:  
-        [Get Gemini API Key](https://aistudio.google.com/app/apikey)
+        ⚠️ **Please enter your OpenAI API key in the sidebar to use this application.**
+
+        You can obtain your API key from the following link:
+        [Get OpenAI API Key](https://platform.openai.com/api-keys)
         """)
 
 if not assemblyai_api_key:
@@ -578,7 +572,7 @@ if st.session_state.status_message:
 else:
     st.sidebar.write("Ready to process video")
 
-if gemini_api_key and assemblyai_api_key:
+if openai_api_key and assemblyai_api_key:
     # Main UI in a single column
     st.subheader("Enter a YouTube Video")
     video_url = st.text_input("Paste YouTube URL:", placeholder="Paste the URL in this format: https://www.youtube.com/watch?v=XXXXX")
